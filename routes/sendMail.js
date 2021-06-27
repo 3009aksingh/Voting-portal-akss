@@ -10,7 +10,7 @@ var smtpTransport = nodemailer.createTransport({
 
 module.exports.sendResetEmail = async (email, token) => {
    // change first part to your domain
-  var url = "http://localhost:5000/accountRoutes/reset-password?token=" + token;
+  var url = "https://voting-portal-akss.herokuapp.com/accountRoutes/reset-password?token=" + token;
 
   await smtpTransport.sendMail({
     from: "ankitkumarsingh18hc@student.mes.ac.in",
