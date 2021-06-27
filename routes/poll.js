@@ -31,15 +31,19 @@ console.log("poll js 2");
 router.get('/vote', (req, res) => {
   console.log("poll js 3");
 
-  Vote.find().then(votes => res.json({ success: true, votes: votes }));
+  Vote.find().then(votes => res.json({ success: true, votes: votes }))
+  .catch((err) =>{
+    console.log(err);
+    console.log("catch ne poll.js mein error pakda");
+  });
+  
   res.render("vote");
   console.log("poll js 4");
 });
 
 router.get("/success", (req, res) =>{ 
 console.log("yoyoyoyooyyoyoooooooooooooooooooooooooooooooooooooooooyyyyyyyyyyyyyyyyoooooooooooooooo");
-  res.render("success");
-
+res.render("success");
 });
 
 console.log(" poll js 4.1")
@@ -62,7 +66,7 @@ router.post('/', (req, res,next) => {
     });
     console.log("poll js 7");
     res.redirect("/poll/success");
-    
+   // return res.json({ success: true, message: 'Thank you for voting' });
   });
 });
 
