@@ -1,0 +1,26 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= name %></p>
+<a href="/users/logout" class="btn btn-secondary">Logout</a>
+
+<section class="delete">
+
+  <h3>Delete data</h3>
+  <form action="/users/dashboard" method="POST">
+    <div class="input">
+      <label for="email"> Email </label>
+      <input type="text" name="email" id="email" />
+    </div>
+    
+    <button type="submit">Delete</button>
+  </form>
+</section>
+
+<script>
+    function preventBack() {
+        window.history.forward();
+      }
+      setTimeout("preventBack()", 0);
+      window.onunload = function () {
+        null;
+      };
+</script>

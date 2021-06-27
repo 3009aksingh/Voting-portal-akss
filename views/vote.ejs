@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css"
+    />
+    <title>Vote</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="header">
+    <div class="container">
+      <h1>Voting</h1>
+      <div
+        id="hasVotedAlre  adyErrorMsg"
+        class="card-panel hidden"
+        style="width: 30%"
+      >
+      </div>
+  
+      <form id="vote-form"  action="/poll/vote" method="POST" > 
+        <input type="radio" name="os" id="windows" value="Windows" style="margin-left: 5px; color: white; text-decoration: sh;" />
+        <label for="windows" ><b>Windows</b></label><br />
+
+        <br />
+        <input type="radio" name="os" id="macos" value="MacOS" class="design text"/>
+        <label for="macos" "><b>MacOS</b></label><br />
+        <br />
+        <input type="radio" name="os" id="linux" value="Linux" class="design text"/>
+        <label for="linux" ><b> Linux Distro </b></label><br />
+        <br />
+        <input type="radio" name="os" id="other" value="Other" class="design text"/>
+        <label for="other" ><b> Something else</b></label><br />
+      <br>
+     
+        <button type="submit" class="btn btn-light" data-mdb-ripple-color="dark" onclick="location.href='https://voting-akss.herokuapp.com/'" >Vote</button>
+ 
+      </form>
+      <h5 style="text-align: center" id="chartTitle"></h5>
+      <div id="chartContainer" style="height: 300px; width: 100%"></div>
+    </div>
+</header>
+    <script
+      src="http://code.jquery.com/jquery-3.3.1.js"
+      integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pusher/4.2.2/pusher.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+
+    <script>
+      function preventBack() {
+        window.history.forward();
+      }
+      setTimeout("preventBack()", 0);
+      window.onunload = function () {
+        null;
+      };
+    </script>
+ 
+    <script>
+
+      const form = document.getElementById("vote-form");
+      var event;
+      console.log("vote script 20");
+      form.addEventListener("submit", (e) => {
+        console.log("vote script 21");
+        const choice = document.querySelector("input[name=os]:checked").value;
+        const data = { os: choice };
+        fetch("http://localhost:5000/poll", {
+          method: "post",
+          body: JSON.stringify(data),
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+        })
+        .then((res) => {
+            res.json();
+            console.log("catch ne error nahi pakda");
+            console.log(res);
+          })
+          .then(data => console.log(data))
+          .catch((err) =>{
+            console.log(err);
+            console.log("catch ne error pakda");
+          });
+        e.preventDefault();
+      });
+      
+   
+      fetch("http://localhost:5000/poll/vote")
+        .then(res => res.json())
+        .then(data => {
+          let votes = data.votes;
+          let totalVotes = votes.length;
+          document.querySelector(
+            "#chartTitle"
+          ).textContent = `Total Votes: ${totalVotes}`;
+          let voteCounts = {
+            Windows: 0,
+            MacOS: 0,
+            Linux: 0,
+            Other: 0,
+          };
+          voteCounts = votes.reduce(
+            (acc, vote) => (
+              (acc[vote.os] = (acc[vote.os] || 0) + parseInt(vote.points)), acc
+            ),
+            {}
+          );
+          let dataPoints = [
+            { label: "Windows", y: voteCounts.Windows },
+            { label: "MacOS", y: voteCounts.MacOS },
+            { label: "Linux", y: voteCounts.Linux },
+            { label: "Other", y: voteCounts.Other },
+          ];
+          
+        });
+
+    </script>
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
+  ></script>
+    <style>
+      /* body */
+      body {
+        width: 100%;
+        min-height: 100vh;
+        background-color: rgb(101, 198, 236);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+      }
+      /* section */
+   
+      .header{
+        background-image: 
+	  linear-gradient(to right bottom,
+     rgba(76, 216, 255, 0.8),
+     rgba(53, 129, 236, 0.8)),
+     url('https://images.unsplash.com/photo-1604065626882-47c3093bec11?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+  
+	background-size: cover;
+  box-shadow: 4px 4px 4px 4px black;
+  
+  
+      }
+      .light {
+        --primary: hsl(0, 0%, 100%);
+        --other: hsl(0, 0%, 100%);
+        background: hsl(0, 0%, 98%);
+      }
+      .os {
+        --primary: hsl(0, 0%, 100%);
+        --other: hsl(0, 0%, 100%);
+        background: hsl(0, 0%, 100%);
+      }
+    
+      h1 {
+        color: white;
+        border-bottom: 2px solid var(--other);
+    
+        text-decoration-line:underline ;
+        text-decoration-thickness:4px ;
+        text-shadow: 1px 1px 15px #252424;
+      }
+  
+      label {
+       
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        margin: 12px 0;
+        color: white;
+        cursor: pointer;
+        position: relative;
+        text-shadow: 1px 1px 0px #252424;
+      }
+      /* input */
+      input {
+        opacity: 0;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+      }
+      /* .design */
+      .design {
+        width: 16px;
+        height: 16px;
+        border: 1px solid var(--other);
+        border-radius: 100%;
+        margin-right: 36px;
+        position: absolute;
+      }
+      .design::before,
+      .design::after {
+        content: "";
+        display:block;
+        width: inherit;
+        height: inherit;
+        border-radius: inherit;
+        position: absolute;
+        transform: scale(0);
+        transform-origin: center center;
+      }
+      .design:before {
+        background: var(--other);
+        opacity: 0;
+        transition: 0.3s;
+      }
+      .design::after {
+        background: var(--primary);
+        opacity: 0.4;
+        transition: 0.6s;
+      }
+      /* .text */
+      .text {
+        color: white;
+        font-weight: bold;
+      }
+      /* checked state */
+      input:checked + .design::before {
+        opacity: initial;
+        transform: scale(0.6);
+      }
+      /* other states */
+      input:hover + .design,
+      input:focus + .design {
+        border: 1px solid var(--primary);
+      }
+      input:hover + .design:before,
+      input:focus + .design:before {
+        background: var(--primary);
+      }
+      input:hover ~ .text {
+        color: var(--primary);
+        
+      }
+      input:focus + .design::after,
+      input:active + .design::after {
+        opacity: 0.1;
+        transform: scale(2.6);
+      }
+      .abs-site-link {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        color: hsla(0, 0%, 0%, 0.6);
+        background: hsla(0, 0%, 100%, 0.6);
+        font-size: 16px;
+      }
+    </style>
+    </style>
+  </body>
+</html>
