@@ -17,23 +17,22 @@ console.log("Log user 8");
 const crypto = require('crypto');
 const resetToken = require('../models/resetTokens');
 const bcryptjs = require('bcryptjs');
-//////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-router.get("/login", (req, res) => { 
-  console.log("CSURF FOR LOGIN =====================================================>>>>>>>>>>>>>> " + req.csrfToken());
-  res.render("login", {csrfToken : req.csrfToken()})});
+router.get("/login", (req, res) => {
+  console.log("CSURF FOR LOGIN => " + req.csrfToken());
+  res.render("login", {
+    csrfToken: req.csrfToken()
+  })
+});
 console.log("Log user 9");
 //Register page -> for rendering register.ejs
 router.get("/register", (req, res) => {
-  console.log("CSURF FOR REGISTER =====================================================>>>>>>>>>>>>>> " + req.csrfToken())
-  res.render("register", {csrfToken : req.csrfToken()})});
+  console.log("CSURF FOR REGISTER => " + req.csrfToken())
+  res.render("register", {
+    csrfToken: req.csrfToken()
+  })
+});
 console.log("Log user 10");
-// router.get('/vote', (req, res) => res.render('vote'));
 console.log("Log user 11");
 
 router.get("/results", (req, res) => {
@@ -45,28 +44,39 @@ router.get("/error", (req, res) => res.render("error"));
 //Register Handle
 router.post("/register", (req, res) => {
   console.log("Log user 12");
-  const { name, email, password, password2 } = req.body;
- 
+  const {
+    name,
+    email,
+    password,
+    password2
+  } = req.body;
+
   console.log("Log user 13");
   let errors = [];
 
   //check the required fields
   if (!name || !email || !password || !password2) {
     res.redirect("/register");
-    errors.push({ msg: "Please enter all fields " });
-    
+    errors.push({
+      msg: "Please enter all fields "
+    });
+
   }
 
   //check password
   if (password != password2) {
     res.redirect("/register");
-    errors.push({ msg: "Passwords do not match" });
-   
+    errors.push({
+      msg: "Passwords do not match"
+    });
+
   }
   //check password length
 
   if (password.length < 6) {
-    errors.push({ msg: "Password must be at least 6 characters" });
+    errors.push({
+      msg: "Password must be at least 6 characters"
+    });
   }
   if (errors.length > 0) {
     res.render("register", {
@@ -75,20 +85,24 @@ router.post("/register", (req, res) => {
       email,
       password,
       password2,
-      csrfToken 
+      csrfToken
     });
   } else {
-    User.findOne({ email: email }).then((user) => {
+    User.findOne({
+      email: email
+    }).then((user) => {
       if (user) {
-        errors.push({ msg: "Email already exists" });
+        errors.push({
+          msg: "Email already exists"
+        });
         res.render("register", {
           errors,
           name,
           email,
           password,
           password2,
-          
-          csrfToken 
+
+          csrfToken
         });
       } else {
         const newUser = new User({
@@ -122,12 +136,9 @@ router.post("/register", (req, res) => {
 // Login
 router.post("/login", (req, res, next) => {
   console.log("Log user 14");
-// -----------------------------------------------------------------------------
-
-// -----------------------------------------------------------------------------------
 
   passport.authenticate("local", {
-   successRedirect: "/poll/vote", //linking with our project Man! i.e. discussion forum
+    successRedirect: "/poll/vote", //linking with our project Man! i.e. discussion forum
     failureRedirect: "/users/error",
     failureFlash: true,
   })(req, res, next);
@@ -136,23 +147,26 @@ router.post("/login", (req, res, next) => {
   const email = req.body.email;
   const csrfToken = "";
   mongo.connect(
-    url,
-    { useUnifiedTopology: true, useNewUrlParser: true },
+    url, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    },
     function (error, client) {
       console.log("Log user 18");
       assert.strictEqual(null, error);
       console.log("Log user 19");
       const db = client.db("voting");
 
-      db.collection("users").findOneAndDelete(
-        { email: email },
+      db.collection("users").findOneAndDelete({
+          email: email
+        },
         function (error, result) {
-          
+
 
           console.log("Log user 20");
           assert.strictEqual(null, error);
           console.log("Item deleted");
-         // res.redirect("/poll/vote");
+          // res.redirect("/poll/vote");
           console.log("Log user 21");
           client.close();
         }
@@ -175,18 +189,21 @@ router.post("/dashboard", function (req, res, next) {
   console.log("Log user 17");
   const email = req.body.email;
   mongo.connect(
-    url,
-    { useUnifiedTopology: true, useNewUrlParser: true },
+    url, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    },
     function (error, client) {
       console.log("Log user 18");
       assert.strictEqual(null, error);
       console.log("Log user 19");
       const db = client.db("voting");
 
-      db.collection("users").findOneAndDelete(
-        { email: email },
+      db.collection("users").findOneAndDelete({
+          email: email
+        },
         function (error, result) {
-          
+
 
           console.log("Log user 20");
           assert.strictEqual(null, error);

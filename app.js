@@ -20,9 +20,10 @@ require("./config/db");
 const db = require("./config/keys").mongoURI;
 
 // Body parser middleware
-app.use(express.urlencoded({ extended: true }));  //now bodyparser is embeded in this command itself
+app.use(express.urlencoded({
+  extended: true
+})); //now bodyparser is embeded in this command itself
 app.use(express.json()); //now bodyparser is embeded in this command itself
-
 
 // Enable CORS
 app.use(cors());
@@ -52,9 +53,7 @@ app.use(passport.session());
 app.use(cookieParser())
 //   connect flash
 
-
 app.use(flash());
-
 
 //global variables
 
@@ -78,7 +77,9 @@ console.log("Log 10");
 
 app.use("/poll", require("./routes/poll.js"));
 
-app.use(csrf({ cookie: true })); 
+app.use(csrf({
+  cookie: true
+}));
 
 app.use("/users", require("./routes/users.js"));
 app.use("/result", require("./routes/result.js"));
@@ -86,8 +87,6 @@ app.use("/result", require("./routes/result.js"));
 app.use("/accountRoutes", require("./routes/accountRoutes.js"));
 
 console.log("Log 11");
-
-// app.use("/userRoutes", require("./controller/userRoutes.js"));
 
 const PORT = process.env.PORT || 5000;
 
