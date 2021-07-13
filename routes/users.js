@@ -12,7 +12,19 @@ var url =
 console.log("Log user 7");
 var assert = require("assert");
 console.log("Log user 8");
-
+const compression = require('compression');
+router.use(
+  compression({
+    level: 6,
+    threshold: 100 * 1000,
+    filter: (req, res) => {
+      if (req.header['x-no-compression']) {
+        return false
+      }
+      return compression.filter(req, res)
+    }
+  })
+)
 
 const crypto = require('crypto');
 const resetToken = require('../models/resetTokens');

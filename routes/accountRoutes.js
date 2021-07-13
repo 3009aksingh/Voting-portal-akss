@@ -5,6 +5,20 @@ const resetToken = require('../models/resetTokens');
 const user = require('../models/User');
 const mailer = require('./sendMail');
 const bcryptjs = require('bcryptjs');
+const compression = require('compression');
+router.use(
+    compression({
+        level: 6,
+        threshold: 100 * 1000,
+        filter: (req, res) => {
+            if (req.header['x-no-compression']) {
+                return false
+            }
+            return compression.filter(req, res)
+        }
+    })
+)
+
 
 router.get('/forgot-password', async (req, res) => {
     // render reset password page 

@@ -14,6 +14,20 @@ router.use(express.urlencoded({
   extended: false
 }));
 
+const compression = require('compression');
+router.use(
+  compression({
+    level: 6,
+    threshold: 100 * 1000,
+    filter: (req, res) => {
+      if (req.header['x-no-compression']) {
+        return false
+      }
+      return compression.filter(req, res)
+    }
+  })
+)
+
 var url = 'mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority';
 console.log("poll js 1");
 var pusher = new Pusher({

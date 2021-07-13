@@ -10,7 +10,9 @@ var url =
   "mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority";
 
 // Body parser middleware
-router.use(express.urlencoded({ extended: true }));  //now bodyparser is embeded in this command itself
+router.use(express.urlencoded({
+  extended: true
+})); //now bodyparser is embeded in this command itself
 router.use(express.json()); //now bodyparser is embeded in this command itself
 
 const votesSchema = {
@@ -21,7 +23,9 @@ const votesSchema = {
 const vote = mongoose.model("vote", votesSchema);
 
 var MongoClient = require("mongodb").MongoClient;
-const { json } = require("body-parser");
+const {
+  json
+} = require("body-parser");
 var window;
 var macos;
 var linux;
@@ -30,53 +34,76 @@ var windowName = "Windows";
 var macosName = "MacOS";
 var linuxName = "Linux";
 var otherName = "Others";
-
+const compression = require('compression');
+router.use(
+  compression({
+    level: 6,
+    threshold: 100 * 1000,
+    filter: (req, res) => {
+      if (req.header['x-no-compression']) {
+        return false
+      }
+      return compression.filter(req, res)
+    }
+  })
+)
 router.get("/table", function (req, res) {
-  MongoClient.connect(url, { useUnifiedTopology: true, useNewUrlParser: true }, function (err, db) {
+  MongoClient.connect(url, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+  }, function (err, db) {
     if (err) throw err;
     var vote = db.db("voting");
     vote
       .collection("votes")
-      .find({os: "Windows"})
+      .find({
+        os: "Windows"
+      })
       .toArray(function (err, result) {
         if (err) throw err;
-        
+
         var a = JSON.stringify(result);
 
         console.log(a);
-       window = JSON.stringify(result.length);
+        window = JSON.stringify(result.length);
         console.log(window);
 
       });
 
-      vote
+    vote
       .collection("votes")
-      .find({os: "Linux"})
+      .find({
+        os: "Linux"
+      })
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
         console.log(a);
         linux = JSON.stringify(result.length);
         console.log(linux);
-        
+
       });
-     
-      vote
+
+    vote
       .collection("votes")
-      .find({os: "MacOS"})
+      .find({
+        os: "MacOS"
+      })
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
         console.log(a);
         macos = JSON.stringify(result.length);
         console.log(macos);
-        
-        
+
+
       });
-      
-      vote
+
+    vote
       .collection("votes")
-      .find({os: "Other"})
+      .find({
+        os: "Other"
+      })
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
@@ -84,17 +111,17 @@ router.get("/table", function (req, res) {
         other = JSON.stringify(result.length);
         console.log(other);
 
-        res.render('table',{
-          windowNames : windowName,
-          macosNames : macosName,
-          linuxNames : linuxName,
-          otherNames : otherName,
+        res.render('table', {
+          windowNames: windowName,
+          macosNames: macosName,
+          linuxNames: linuxName,
+          otherNames: otherName,
           windowsCount: window,
           linuxCount: linux,
           macosCount: macos,
           otherCount: other
         })
-        
+
       });
 
   });
