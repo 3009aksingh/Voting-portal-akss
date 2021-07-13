@@ -1,121 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <header class="header">
-      <div class="brand-box">
-        <span class="brand">Event Management</span>
-      </div>
 
-      <div class="text-box">
-        <h1 class="heading-primary">
-          <span class="heading-primary-main">Creat account or login</span>
-          <span class="heading-primary-sub"></span>
-        </h1>
-        <a href="/users/register" class="btn btn-white btn-animated">Register</a
-        ><br /><br />
-        <a href="/users/login" class="btn btn-white btn-animated">Login</a
-        ><br /><br />
-        <a href="/result/table" class="btn btn-white btn-animated">Result</a>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
 
-    <style>
-      body {
-        font-family: "Lato", sans-serif;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 1.7;
-        color: rgb(238, 238, 238);
-        background-color: rgb(200, 255, 255);
-      }
+<body>
+  <header class="header">
+    <div class="brand-box">
+      <span class="brand">Management Voting</span>
+    </div>
 
-      .header {
-        height: 100vh;
+    <div class="text-box">
+      <h1 class="heading-primary">
+        <span class="heading-primary-main">Creat account or login</span>
+        <span class="heading-primary-sub"></span>
+      </h1>
+      <a href="/users/register" class="btn btn-white btn-animated">Register</a><br /><br />
+      <a href="/users/login" class="btn btn-white btn-animated">Login</a><br /><br />
+      <a href="/result/table" class="btn btn-white btn-animated">Result</a>
+    </div>
+  </header>
 
-        background-image: linear-gradient(
-            to right bottom,
-            rgba(76, 216, 255, 0.8),
-            rgba(53, 129, 236, 0.8)
-          ),
-          url("https://images.unsplash.com/photo-1477281765962-ef34e8bb0967?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=632&q=80");
+  <style>
+    body {
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.7;
+      color: rgb(238, 238, 238);
+      background-color: rgb(200, 255, 255);
+    }
 
-        background-size: cover;
-        background-position: center;
-        position: relative;
-      }
+    .header {
+      height: 100vh;
 
-      .brand-box {
-        position: absolute;
-        top: 40px;
-        left: 40px;
-      }
+      background-image: linear-gradient(to right bottom,
+          rgba(76, 216, 255, 0.8),
+          rgba(53, 129, 236, 0.8)),
+        url("https://images.unsplash.com/photo-1477281765962-ef34e8bb0967?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=632&q=80");
 
-      .brand {
-        font-size: 20px;
-      }
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
 
-      .text-box {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
-      }
+    .brand-box {
+      position: absolute;
+      top: 40px;
+      left: 40px;
+    }
 
-      .heading-primary {
-        color: #fff;
-        text-transform: uppercase;
+    .brand {
+      font-size: 20px;
+    }
 
-        backface-visibility: hidden;
-        margin-bottom: 30px;
-      }
+    .text-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
 
-      .heading-primary-main {
-        display: block;
-        font-size: 26px;
-        font-weight: 400;
-        letter-spacing: 5px;
-      }
+    .heading-primary {
+      color: #fff;
+      text-transform: uppercase;
 
-      .heading-primary-sub {
-        display: block;
-        font-size: 18px;
-        font-weight: 700;
-        letter-spacing: 7.4px;
-      }
+      backface-visibility: hidden;
+      margin-bottom: 30px;
+    }
 
-      .btn:link,
-      .btn:visited {
-        text-transform: uppercase;
-        text-decoration: none;
-        padding: 10px 20px;
-        display: inline-block;
-        border-radius: 100px;
-        transition: all 0.2s;
-        position: relative;
-      }
+    .heading-primary-main {
+      display: block;
+      font-size: 26px;
+      font-weight: 400;
+      letter-spacing: 5px;
+    }
 
-      .btn:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-      }
+    .heading-primary-sub {
+      display: block;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 7.4px;
+    }
 
-      .btn:active {
-        transform: translateY(-1px);
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-      }
+    .btn:link,
+    .btn:visited {
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 10px 20px;
+      display: inline-block;
+      border-radius: 100px;
+      transition: all 0.2s;
+      position: relative;
+    }
 
-      .btn-white {
-        background-color: #fff;
-        color: #777;
-        font-size: 14px;
-      }
-    </style>
-  </body>
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-white {
+      background-color: #fff;
+      color: #777;
+      font-size: 14px;
+    }
+  </style>
+</body>
+
 </html>

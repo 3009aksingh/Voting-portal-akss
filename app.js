@@ -7,6 +7,12 @@ const cookieParser = require('cookie-parser');
 const flash = require("connect-flash");
 const session = require("express-session");
 const app = express();
+const path = require('path');
+const dir = path.join(__dirname, 'public');
+
+app.use(express.static(dir));
+var favicon = require('serve-favicon');
+app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));
 
 var MemoryStore = require('memorystore')(session)
 const bodyParser = require("body-parser");
