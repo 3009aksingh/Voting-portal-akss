@@ -9,7 +9,10 @@
   </a>
 </p>
 
-> Currently the procedure of Election is: we have to cast our votes by going to a place, filling up a form and then dropping it into a box. One/two weeks later results use to be declared. The Process is bit lengthy and requires lot of physical labour and consumes time. Hence, this idea came to me to develop a system, which can be easily accessible from anywhere inside and outside the campus using a smart-phone or a computer device. This will simplify our life a lot saving our time and our effort.
+> Currently the procedure of Election is: we have to cast our votes by going to a place, filling up a form and then dropping it into a box. One/two weeks later results use to be declared. The Process is bit lengthy and requires lot of physical labour and consumes time. Hence, this idea came to me to develop a system, which can be easily accessible from anywhere inside and outside the campus using a smart-phone or a computer device. This will simplify our life a lot saving our time and our effort. Built a responsive and real-time voting web application, created using NodeJS, MongoDB, Express,
+EJS. Performed real-time vote counting using pusher-js package and added feature like reset password. Used Polling API
+and CRUD API’s for counting votes and maintaining users. Analyzed and made the website light weight using gzip
+compression technique for fast processing.
 
 ### 🏠 [Homepage](https://voting-portal-akss.herokuapp.com/)
 
