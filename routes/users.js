@@ -7,8 +7,10 @@ var ObjectID = require('bson').ObjectID;
 const User = require("../models/User");
 const passport = require("passport");
 var mongo = require("mongodb").MongoClient;
-var url =
-  "mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority";
+const dotenv = require("dotenv");
+dotenv.config();
+var url = process.env.MONGODB_URL;
+
 console.log("Log user 7");
 var assert = require("assert");
 console.log("Log user 8");

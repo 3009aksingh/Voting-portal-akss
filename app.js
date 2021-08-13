@@ -9,7 +9,8 @@ const session = require("express-session");
 const app = express();
 const path = require('path');
 const dir = path.join(__dirname, 'public');
-
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(express.static(dir));
 var favicon = require('serve-favicon');
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.png')));

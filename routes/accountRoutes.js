@@ -148,7 +148,6 @@ router.post('/reset-password', async (req, res) => {
                 err: "Unexpected Error Try Again",
                 email: email
             });
-
         }
     }
 });

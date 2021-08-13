@@ -9,7 +9,9 @@ const Vote = require('../models/Vote');
 const Pusher = require('pusher');
 
 const keys = require('../config/keys');
-
+const dotenv = require('dotenv');
+dotenv.config();
+const url = process.env.MONGODB_URL;
 router.use(express.urlencoded({
   extended: false
 }));
@@ -28,16 +30,14 @@ router.use(
   })
 )
 
-var url = 'mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority';
+// var url = 'mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority';
 console.log("poll js 1");
 var pusher = new Pusher({
-
-
-  app_id: '1223488',
-  key: '502c1fea8eb9a78067ff',
-  secret: '81ffecf2444f03777be6',
-  cluster: 'ap2',
-  useTLS: true
+  app_id: process.env.API,
+  key: process.env.KEY,
+  secret: process.env.SECRET,
+  cluster: process.env.CLUSTER,
+  useTLS: process.env.TLS
 });
 
 console.log("poll js 2");
@@ -59,7 +59,7 @@ router.get('/vote', (req, res) => {
 });
 
 router.get("/success", (req, res) => {
-  console.log("yoyoyoyooyyoyoooooooooooooooooooooooooooooooooooooooooyyyyyyyyyyyyyyyyoooooooooooooooo");
+  console.log("yo");
   res.render("success");
 });
 

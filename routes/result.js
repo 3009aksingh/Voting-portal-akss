@@ -6,13 +6,14 @@ const bodyParser = require("body-parser");
 const keys = require("../config/keys");
 var mongo = require("mongodb").MongoClient;
 var assert = require("assert");
-var url =
-  "mongodb+srv://ankit:ankita@cluster0.5bzmb.mongodb.net/voting?retryWrites=true&w=majority";
-
+const dotenv = require("dotenv");
+dotenv.config();
+var url = process.env.MONGODB_URL;
+console.log('this is result mongoDB : ' + url);
 // Body parser middleware
 router.use(express.urlencoded({
   extended: true
-})); //now bodyparser is embeded in this command itself
+})); //now bodyparser is embeded Fin this command itself
 router.use(express.json()); //now bodyparser is embeded in this command itself
 
 const votesSchema = {
