@@ -11,9 +11,9 @@ const dotenv = require("dotenv");
 dotenv.config();
 var url = process.env.MONGODB_URL;
 
-console.log("Log user 7");
+
 var assert = require("assert");
-console.log("Log user 8");
+
 const compression = require('compression');
 router.use(
   compression({
@@ -33,21 +33,16 @@ const resetToken = require('../models/resetTokens');
 const bcryptjs = require('bcryptjs');
 
 router.get("/login", (req, res) => {
-  console.log("CSURF FOR LOGIN => " + req.csrfToken());
   res.render("login", {
     csrfToken: req.csrfToken()
   })
 });
-console.log("Log user 9");
 //Register page -> for rendering register.ejs
 router.get("/register", (req, res) => {
-  console.log("CSURF FOR REGISTER => " + req.csrfToken())
   res.render("register", {
     csrfToken: req.csrfToken()
   })
 });
-console.log("Log user 10");
-console.log("Log user 11");
 
 router.get("/results", (req, res) => {
   res.render("results");
@@ -57,15 +52,12 @@ router.get("/error", (req, res) => res.render("error"));
 
 //Register Handle
 router.post("/register", (req, res) => {
-  console.log("Log user 12");
   const {
     name,
     email,
     password,
     password2
   } = req.body;
-
-  console.log("Log user 13");
   let errors = [];
 
   //check the required fields
@@ -149,15 +141,12 @@ router.post("/register", (req, res) => {
 
 // Login
 router.post("/login", (req, res, next) => {
-  console.log("Log user 14");
-
   passport.authenticate("local", {
     successRedirect: "/poll/vote", //linking with our project Man! i.e. discussion forum
     failureRedirect: "/users/error",
     failureFlash: true,
   })(req, res, next);
 
-  console.log("Log user 17");
   const email = req.body.email;
   const csrfToken = "";
   mongo.connect(
@@ -166,41 +155,30 @@ router.post("/login", (req, res, next) => {
       useNewUrlParser: true
     },
     function (error, client) {
-      console.log("Log user 18");
       assert.strictEqual(null, error);
-      console.log("Log user 19");
       const db = client.db("voting");
 
       db.collection("users").findOneAndDelete({
           email: email
         },
         function (error, result) {
-
-
-          console.log("Log user 20");
           assert.strictEqual(null, error);
-          console.log("Item deleted");
-          // res.redirect("/poll/vote");
-          console.log("Log user 21");
           client.close();
         }
       );
     }
   );
-  console.log("Log user 15");
 });
 
 
 // Logout
 router.get("/logout", (req, res) => {
   req.logout();
-  console.log("Log user 16");
   req.flash("success_msg", "You are logged out");
   res.redirect("/users/login");
 });
 
 router.post("/dashboard", function (req, res, next) {
-  console.log("Log user 17");
   const email = req.body.email;
   mongo.connect(
     url, {
@@ -208,22 +186,15 @@ router.post("/dashboard", function (req, res, next) {
       useNewUrlParser: true
     },
     function (error, client) {
-      console.log("Log user 18");
       assert.strictEqual(null, error);
-      console.log("Log user 19");
       const db = client.db("voting");
 
       db.collection("users").findOneAndDelete({
           email: email
         },
         function (error, result) {
-
-
-          console.log("Log user 20");
           assert.strictEqual(null, error);
-          console.log("Item deleted");
           res.redirect("/poll/vote");
-          console.log("Log user 21");
           client.close();
         }
       );

@@ -1,6 +1,5 @@
 module.exports = {
-    mongoURI : '',
-    
+    mongoURI: '',
     pusherAppId: '',
     pusherKey: '',
     pusherSecret: '',

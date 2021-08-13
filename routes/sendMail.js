@@ -17,7 +17,6 @@ module.exports.sendResetEmail = async (email, token) => {
     to: email,
     subject: "RESET YOUR PASSWORD",
     text: `Click on this link to reset your password ${url}`,
-    // html: `<h3> Click on this link to reset your password : ${url} </h3>`,
     html: `<tbody>
     <tr
       style="

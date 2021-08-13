@@ -7,7 +7,7 @@ const {
 
 //welcome page -> for rendering welcome.ejs file
 router.get('/', (req, res) => res.render('welcome'));
-console.log("index js");
+
 //dashboard
 router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboard', {
     name: req.user.name

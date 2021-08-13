@@ -27,8 +27,6 @@ router.get('/forgot-password', async (req, res) => {
     res.render('forgot-password.ejs', {
         csrfToken: req.csrfToken()
     });
-    console.log(csrfToken);
-
 });
 
 router.post('/forgot-password', async (req, res) => {
@@ -40,7 +38,6 @@ router.post('/forgot-password', async (req, res) => {
     var userData = await user.findOne({
         email: email
     });
-    console.log(userData);
     if (userData) {
         if (userData.provider == 'google') {
             // type is for bootstrap alert types
@@ -119,8 +116,6 @@ router.post('/reset-password', async (req, res) => {
         password2,
         email
     } = req.body;
-    console.log(password);
-    console.log(password2);
     if (!password || !password2 || (password2 != password)) {
         res.render('forgot-password.ejs', {
             csrfToken: req.csrfToken(),

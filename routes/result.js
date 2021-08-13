@@ -9,7 +9,7 @@ var assert = require("assert");
 const dotenv = require("dotenv");
 dotenv.config();
 var url = process.env.MONGODB_URL;
-console.log('this is result mongoDB : ' + url);
+
 // Body parser middleware
 router.use(express.urlencoded({
   extended: true
@@ -64,11 +64,7 @@ router.get("/table", function (req, res) {
         if (err) throw err;
 
         var a = JSON.stringify(result);
-
-        console.log(a);
         window = JSON.stringify(result.length);
-        console.log(window);
-
       });
 
     vote
@@ -79,10 +75,7 @@ router.get("/table", function (req, res) {
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
-        console.log(a);
         linux = JSON.stringify(result.length);
-        console.log(linux);
-
       });
 
     vote
@@ -93,11 +86,7 @@ router.get("/table", function (req, res) {
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
-        console.log(a);
         macos = JSON.stringify(result.length);
-        console.log(macos);
-
-
       });
 
     vote
@@ -108,10 +97,7 @@ router.get("/table", function (req, res) {
       .toArray(function (err, result) {
         if (err) throw err;
         var a = JSON.stringify(result);
-        console.log(a);
         other = JSON.stringify(result.length);
-        console.log(other);
-
         res.render('table', {
           windowNames: windowName,
           macosNames: macosName,
@@ -126,9 +112,6 @@ router.get("/table", function (req, res) {
       });
 
   });
-
-  console.log("END ")
-
 });
 
 module.exports = router;
