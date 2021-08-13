@@ -11,9 +11,9 @@
 
 > Currently the procedure of Election is: we have to cast our votes by going to a place, filling up a form and then dropping it into a box. One/two weeks later results use to be declared. The Process is bit lengthy and requires lot of physical labour and consumes time. Hence, this idea came to me to develop a system, which can be easily accessible from anywhere inside and outside the campus using a smart-phone or a computer device. This will simplify our life a lot saving our time and our effort.
 
-<a href="https://i.imgur.com/6nGnpxG.gifv" >
+<!-- <a href="https://i.imgur.com/6nGnpxG.gifv" > -->
 <img src="https://i.imgur.com/6nGnpxG.gifv" />
-</a>
+<!-- </a> -->
 ![demo gif](https://i.imgur.com/6nGnpxG.gifv)
 ![img](http://i.imgur.com/6nGnpxG.gifv)
 ![demo gifs](https://i.imgur.com/soobfhI.gifv)
