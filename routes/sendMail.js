@@ -3,8 +3,8 @@ const nodemailer = require("nodemailer");
 var smtpTransport = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "eventakss@gmail.com",
-    pass: "Event@10akss",
+    user: "eventakss2006@gmail.com",
+    pass: "Akss2006",
   },
 });
 
@@ -13,7 +13,7 @@ module.exports.sendResetEmail = async (email, token) => {
   var url = "https://voting-portal-akss.herokuapp.com/accountRoutes/reset-password?token=" + token;
 
   await smtpTransport.sendMail({
-    from: "ankitkumarsingh18hc@student.mes.ac.in",
+    from: "3009aksingh@gmail.com",
     to: email,
     subject: "RESET YOUR PASSWORD",
     text: `Click on this link to reset your password ${url}`,
